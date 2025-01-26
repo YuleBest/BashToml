@@ -1,0 +1,48 @@
+# 应用基础配置
+[app]
+name = "Super Server"
+version = "2.3.4"
+enable_ssl = true
+startup_timeout = 30.5
+tags = [ "high-availability", "load-balancing", "auto-scaling" ]
+
+# 数据库集群配置
+[database.primary]
+host = "db-primary.prod"
+port = 5432
+credentials = { user = "admin", password = "P@ssw0rd!2023" }
+replica_hosts = [ "db-replica1", "db-replica2" ]
+
+[database.cache]
+redis_nodes = [
+  "redis://10.0.0.1:6379",
+  "redis://10.0.0.2:6379?timeout=5s",
+  "redis://10.0.0.3:6379"
+]
+
+# 微服务端点配置
+[services]
+api_version = "v3"
+
+  [services.gateway]
+  endpoint = "https://api.example.com"
+  retry_policy = [ 200, 500, 1000 ]
+  timeouts = { connect = 5.0, response = 30.0 }
+
+  [services.auth]
+  providers = [
+    { name = "google", enabled = true },
+    { name = "github", enabled = false },
+    { name = "saml", enabled = true }
+  ]
+
+# 监控配置
+[monitoring.alert]
+email_recipients = [
+  "admin@example.com",
+  "backup-admin@example.com"
+]
+schedules = [
+  { type = "daily", time = "23:00" },
+  { type = "weekly", day = "Monday" }
+]
