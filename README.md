@@ -110,9 +110,11 @@ parse_toml config.toml | jq -n 'inputs' > config.json
 
 ## 获取与使用
 
-1. 在本项目的 Release 页面获取最新版本和测试用例
+1. 确保你的 Bash 版本为 4.0 或以上 (bash --version)
 
-2. 进行测试、修改和复制粘贴即可
+2. 在本项目的 Release 页面获取最新版本和测试用例
+
+3. 进行测试、修改和复制粘贴即可
 
 ```bash
 cd <工具所在目录>
